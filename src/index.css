@@ -11,7 +11,8 @@ html {
 
 body{
   background-image: linear-gradient(blue, dodgerblue, lightblue);
-  min-height: 100vh; overflow: hidden;
+  min-height: 100vh; 
+ 
 }
 
 table{
@@ -62,5 +63,16 @@ table{
 
   .button:hover{
     opacity: 50%;
+  }
+
+  .inner {
+    background-color: #fff;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 250px;
+    box-shadow: 0 40px 80px #FBE4E0;
+    border-radius: 14px;
   }
 
