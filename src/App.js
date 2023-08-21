@@ -1,7 +1,14 @@
 import { useState } from "react";
-import axios from "axios";
+import sunny from "./sunny.png"
+import rainy from "./rainy.png"
+import semi from "./semi.png"
+import cloudy from "./cloudy.png"
+
+var picture= sunny;
+
 
 function App() {
+
 
  var APIdata 
 const [data,setData ] = useState({} );
@@ -23,6 +30,18 @@ const getData = (event) => {
   if(event.key === 'Enter'){
 
     checkWeather();
+    if( data.clouds.all > 39 && data.clouds.all < 70){
+      picture = semi;
+     }
+      if(data.clouds.all > 70){
+       picture = cloudy;
+     }
+      if(data.weather[0].main === "Rainy"){
+       picture = rainy;
+     }
+     if(data.clouds.all === 0){
+      picture = sunny;
+     }
   }
 }
 
@@ -43,7 +62,7 @@ const getData = (event) => {
           <h2 className="location">{data.name}</h2>
             <table>
                 <tr>
-                  <th> <img src="assets/sunny.png" className="slika" /></th>
+                  <th> <img src ={picture}  className="slika" /></th>
                     <th>{data.main ? <h2>{data.main.temp }°C</h2> : null }</th>
                 </tr>
             </table>
