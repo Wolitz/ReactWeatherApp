@@ -30,18 +30,17 @@ const getData = (event) => {
   if(event.key === 'Enter'){
 
     checkWeather();
-    if( data.clouds.all > 39 && data.clouds.all < 70){
-      picture = semi;
-     }
-      if(data.clouds.all > 70){
-       picture = cloudy;
-     }
-      if(data.weather[0].main === "Rainy"){
-       picture = rainy;
-     }
-     if(data.clouds.all === 0){
+    if (data && data.clouds && typeof data.clouds.all !== 'undefined') {
+      if (data.clouds.all > 39 && data.clouds.all < 70) {
+        picture = semi;
+      } else if (data.clouds.all > 70) {
+        picture = cloudy;
+      }
+    } else if (data && data.weather && data.weather[0] && data.weather[0].main === "Rainy") {
+      picture = rainy;
+    } else if (data && data.clouds && typeof data.clouds.all !== 'undefined' && data.clouds.all === 0) {
       picture = sunny;
-     }
+    }
   }
 }
 
