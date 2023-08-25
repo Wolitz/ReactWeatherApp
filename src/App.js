@@ -7,10 +7,10 @@ import cloudy from "./cloudy.png"
 var picture= sunny;
 
 
-function App() {
+function App() { 
 
 
- var APIdata 
+var APIdata 
 const [data,setData ] = useState({} );
 const [location,setLocation ] = useState("" );
 
@@ -69,7 +69,7 @@ const getData = (event) => {
             {data.main ? <h2> P: {data.main.pressure }Ph</h2> : null } 
             {data.wind ? <h2> S: {data.wind.speed }KM/H</h2> : null }
       </center>
-      
+
      </div>
   );
 }
