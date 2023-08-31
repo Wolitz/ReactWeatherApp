@@ -16,20 +16,22 @@ const [picture, setPicture] = useState()
 
 const apiKey = "ffcc3b1d6839acddfd18b10b824cdae1";
 const apiUrl=  "https://api.openweathermap.org/data/2.5/weather?&units=metric&q=";
-
- const checkWeather = async () => {
- const response = await fetch(apiUrl + location +'&appid=' + apiKey);
+const checkWeather = async () => {
+  const response = await fetch(apiUrl + location +'&appid=' + apiKey);
   APIdata = await response.json();
- setData(APIdata)
+  setData(APIdata)
+  const picID =data.weather[0].icon;
+  const imgUrl = 'https://openweathermap.org/img/wn/' + picID + '@2x.png';
+  setPicture(imgUrl);
 }
 
+const counter = 0;
  
 const getData = (event) => {
   if(event.key === 'Enter'){
-    const picID = data.weather[0].icon
-    const imgUrl = 'https://openweathermap.org/img/wn/' + picID + '@2x.png';
-    checkWeather();
-    setPicture(imgUrl);
+
+      checkWeather();
+
   }
 }
 
