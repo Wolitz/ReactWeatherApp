@@ -9,7 +9,7 @@ import cloudy from "./cloudy.png"
 function App() { 
 
 
-var APIdata 
+var APIdata ;
 const [data,setData ] = useState({} );
 const [location,setLocation ] = useState("" );
 const [picture, setPicture] = useState()
