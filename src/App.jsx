@@ -4,7 +4,6 @@ import rainy from "./rainy.png"
 import semi from "./semi.png"
 import cloudy from "./cloudy.png"
 
-var picture= sunny;
 
 
 function App() { 
@@ -13,6 +12,7 @@ function App() {
 var APIdata 
 const [data,setData ] = useState({} );
 const [location,setLocation ] = useState("" );
+const [picture, setPicture] = useState()
 
 const apiKey = "ffcc3b1d6839acddfd18b10b824cdae1";
 const apiUrl=  "https://api.openweathermap.org/data/2.5/weather?&units=metric&q=";
@@ -21,31 +21,20 @@ const apiUrl=  "https://api.openweathermap.org/data/2.5/weather?&units=metric&q=
  const response = await fetch(apiUrl + location +'&appid=' + apiKey);
   APIdata = await response.json();
  setData(APIdata)
- console.log(APIdata);
-  
 }
 
  
 const getData = (event) => {
   if(event.key === 'Enter'){
-
+    const picID = data.weather[0].icon
+    const imgUrl = 'https://openweathermap.org/img/wn/' + picID + '@2x.png';
     checkWeather();
-    if (data && data.clouds && typeof data.clouds.all !== 'undefined') {
-      if (data.clouds.all > 39 && data.clouds.all < 70) {
-        picture = semi;
-      } else if (data.clouds.all > 70) {
-        picture = cloudy;
-      }
-    } else if (data && data.weather && data.weather[0] && data.weather[0].main === "Rainy") {
-      picture = rainy;
-    } else if (data && data.clouds && typeof data.clouds.all !== 'undefined' && data.clouds.all === 0) {
-      picture = sunny;
-    }
+    setPicture(imgUrl);
   }
 }
 
   return (
-     <div>
+     <div className="background">
       <center>
         <h1 className="font">Weather</h1>
           <div className="search">
