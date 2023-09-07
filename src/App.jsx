@@ -10,7 +10,22 @@ function App() {
 
 
 var APIdata ;
-const [data,setData ] = useState({} );
+const [data, setData] = useState({
+  name: "",
+  main: {
+    temp: "",
+    humidity: "",
+    pressure: "",
+  },
+  weather: [
+    {
+      icon: "",
+    },
+  ],
+  wind: {
+    speed: "",
+  },
+});
 const [location,setLocation ] = useState("" );
 const [picture, setPicture] = useState()
 
