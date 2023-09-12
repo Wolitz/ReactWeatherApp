@@ -1,10 +1,23 @@
 import React, { useState } from "react";
+import styled from "styled-components";
 import sunny from "./sunny.png";
 import rainy from "./rainy.png";
 import semi from "./semi.png";
 import cloudy from "./cloudy.png";
 
 function App() {
+
+  const Background = styled.div`
+  background-color: #e0e0e0;
+  text-align: center;
+  padding: 20px;
+`;
+
+const Title = styled.h1`
+  font-size: 2rem;
+  margin-bottom: 20px;
+`;
+
   const apiKey = "ffcc3b1d6839acddfd18b10b824cdae1";
   const apiUrl = "https://api.openweathermap.org/data/2.5/weather?&units=metric&q=";
 
