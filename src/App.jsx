@@ -1,0 +1,117 @@
+import React, { useState } from "react";
+import styled from "styled-components";
+
+
+function App() {
+
+  const Background = styled.div`
+  background-color: #e0e0e0;
+  text-align: center;
+  padding: 20px;
+`;
+
+const Title = styled.h1`
+  font-size: 2rem;
+  margin-bottom: 20px;
+`;
+
+const SearchContainer = styled.div`
+  margin-bottom: 20px;
+`;
+
+const SearchInput = styled.input`
+  padding: 10px;
+  width: 300px;
+  font-size: 1rem;
+`;
+
+const ErrorMessage = styled.div`
+  color: red;
+  margin-top: 10px;
+`;
+
+const Location = styled.h2`
+  font-size: 1.5rem;
+`;
+
+const WeatherTable = styled.table`
+  margin: 0 auto;
+`;
+
+const WeatherData = styled.th`
+  padding: 10px;
+`;
+
+const WeatherImage = styled.img`
+  width: 100px;
+  height: 100px;
+`;
+
+  const apiKey = "ffcc3b1d6839acddfd18b10b824cdae1";
+  const apiUrl = "https://api.openweathermap.org/data/2.5/weather?&units=metric&q=";
+
+  const [data, setData] = useState({});
+  const [location, setLocation] = useState("");
+  const [picture, setPicture] = useState();
+  const [errorMessage, setErrorMessage] = useState(null); 
+
+  const checkWeather = async () => {
+    try {
+      const response = await fetch(apiUrl + location + "&appid=" + apiKey);
+      if (!response.ok) {
+        throw new Error("The city is not found, try again");
+      }
+      const APIdata = await response.json();
+      if (APIdata.cod && APIdata.message) {
+        throw new Error(APIdata.message);
+      }
+      setData(APIdata);
+      const picID = APIdata.weather[0].icon;
+      const imgUrl = "https://openweathermap.org/img/wn/" + picID + "@2x.png";
+      setPicture(imgUrl);
+      setErrorMessage(null); 
+    } catch (error) {
+      console.error("Error fetching weather data:", error.message);
+      setErrorMessage(error.message); 
+    }
+  };
+
+  const getData = (event) => {
+    if (event.key === "Enter") {
+      checkWeather();
+    }
+  };
+
+  return (
+    <div className="background">
+      <center>
+        <h1 className="font">Weather</h1>
+        <div className="search">
+          <input
+            type="text"
+            id="myText"
+            onChange={(event) => setLocation(event.target.value)}
+            onKeyUp={getData}
+            placeholder="Search..."
+          />
+          {errorMessage && <div className="error-message">{errorMessage}</div>} {}
+        </div>
+        <br />
+        <h2 className="location">{data.name}</h2>
+        <table>
+          <tr>
+            <th>
+              <img src={picture} className="picture" alt="" />
+            </th>
+            <th>{data.main ? <h2>{data.main.temp}°C</h2> : null}</th>
+          </tr>
+        </table>
+        {data.main ? <h2> H: {data.main.humidity}%</h2> : null}
+        {data.main ? <h2> P: {data.main.pressure}Ph</h2> : null}
+        {data.wind ? <h2> S: {data.wind.speed}KM/H</h2> : null}
+      </center>
+    </div>
+  );
+}
+
+export default App;
