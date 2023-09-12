@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import sunny from "./sunny.png";
-import rainy from "./rainy.png";
-import semi from "./semi.png";
-import cloudy from "./cloudy.png";
+
 
 function App() {
 
@@ -16,6 +13,38 @@ function App() {
 const Title = styled.h1`
   font-size: 2rem;
   margin-bottom: 20px;
+`;
+
+const SearchContainer = styled.div`
+  margin-bottom: 20px;
+`;
+
+const SearchInput = styled.input`
+  padding: 10px;
+  width: 300px;
+  font-size: 1rem;
+`;
+
+const ErrorMessage = styled.div`
+  color: red;
+  margin-top: 10px;
+`;
+
+const Location = styled.h2`
+  font-size: 1.5rem;
+`;
+
+const WeatherTable = styled.table`
+  margin: 0 auto;
+`;
+
+const WeatherData = styled.th`
+  padding: 10px;
+`;
+
+const WeatherImage = styled.img`
+  width: 100px;
+  height: 100px;
 `;
 
   const apiKey = "ffcc3b1d6839acddfd18b10b824cdae1";
