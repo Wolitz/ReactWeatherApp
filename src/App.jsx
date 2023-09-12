@@ -59,7 +59,7 @@ function App() {
         <table>
           <tr>
             <th>
-              <img src={picture} className="slika" alt="" />
+              <img src={picture} className="picture" alt="" />
             </th>
             <th>{data.main ? <h2>{data.main.temp}°C</h2> : null}</th>
           </tr>
